@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Zap, Brain, Coins, TrendingUp, Check, Star, BarChart3, Cpu, Layers, Zap as ZapIcon } from "lucide-react";
+import { ArrowRight, Zap, Brain, Coins, TrendingUp, Check, Star, BarChart3, Cpu, Layers, Zap as ZapIcon, TrendingDown } from "lucide-react";
+import { useCryptoPrices } from "@/hooks/useCryptoPrices";
 
 /**
  * Quantum Kienzy - Home Page
@@ -11,6 +12,8 @@ import { ArrowRight, Zap, Brain, Coins, TrendingUp, Check, Star, BarChart3, Cpu,
  */
 
 export default function Home() {
+  const { prices, loading } = useCryptoPrices();
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Navigation */}
@@ -193,26 +196,36 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Experience the power of real-time trading analytics and AI-driven insights</p>
           
           <div className="bg-gradient-to-br from-cyan-500/10 to-magenta-500/10 rounded-lg border border-border p-8 overflow-hidden">
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="space-y-4">
-                <div className="text-sm text-muted-foreground">BTC/USD</div>
-                <div className="text-4xl font-bold text-primary">$67,420</div>
-                <div className="text-sm text-green-400">↑ 3.2% (24h)</div>
-                <div className="h-12 bg-gradient-to-r from-cyan-500/20 to-transparent rounded"></div>
+            {loading ? (
+              <div className="flex items-center justify-center h-32">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
               </div>
-              <div className="space-y-4">
-                <div className="text-sm text-muted-foreground">ETH/USD</div>
-                <div className="text-4xl font-bold text-accent">$3,845</div>
-                <div className="text-sm text-green-400">↑ 5.1% (24h)</div>
-                <div className="h-12 bg-gradient-to-r from-magenta-500/20 to-transparent rounded"></div>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-6">
+                {prices.map((crypto, idx) => {
+                  const isPositive = crypto.change24h >= 0;
+                  const colors = ["text-primary", "text-accent", "text-purple-400"];
+                  const gradients = ["from-cyan-500/20", "from-magenta-500/20", "from-purple-500/20"];
+                  
+                  return (
+                    <div key={crypto.id} className="space-y-4">
+                      <div className="flex items-center gap-2">
+                        <img src={crypto.image} alt={crypto.symbol} className="w-6 h-6 rounded-full" />
+                        <div>
+                          <div className="text-sm font-bold text-foreground">{crypto.symbol}</div>
+                          <div className="text-xs text-muted-foreground">{crypto.name}</div>
+                        </div>
+                      </div>
+                      <div className={`text-4xl font-bold ${colors[idx]}`}>${crypto.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+                      <div className={`text-sm flex items-center gap-1 ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                        {isPositive ? '↑' : '↓'} {Math.abs(crypto.change24h).toFixed(2)}% (24h)
+                      </div>
+                      <div className={`h-12 bg-gradient-to-r ${gradients[idx]} to-transparent rounded animate-pulse`}></div>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="space-y-4">
-                <div className="text-sm text-muted-foreground">AI Score</div>
-                <div className="text-4xl font-bold text-purple-400">8.7/10</div>
-                <div className="text-sm text-green-400">Strong Buy Signal</div>
-                <div className="h-12 bg-gradient-to-r from-purple-500/20 to-transparent rounded"></div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
