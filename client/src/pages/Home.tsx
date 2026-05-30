@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Zap, Brain, Coins, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, Brain, Coins, TrendingUp, Check, Star, BarChart3, Cpu, Layers, Zap as ZapIcon } from "lucide-react";
 
 /**
  * Quantum Kienzy - Home Page
@@ -183,6 +183,163 @@ export default function Home() {
           <Button size="lg" className="bg-primary text-background hover:bg-cyan-500 text-lg">
             Start Trading Now <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
+        </div>
+      </section>
+
+      {/* Dashboard Preview Section */}
+      <section className="py-20 px-4 border-t border-border bg-card/30">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 neon-glow">Dashboard Preview</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Experience the power of real-time trading analytics and AI-driven insights</p>
+          
+          <div className="bg-gradient-to-br from-cyan-500/10 to-magenta-500/10 rounded-lg border border-border p-8 overflow-hidden">
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="space-y-4">
+                <div className="text-sm text-muted-foreground">BTC/USD</div>
+                <div className="text-4xl font-bold text-primary">$67,420</div>
+                <div className="text-sm text-green-400">↑ 3.2% (24h)</div>
+                <div className="h-12 bg-gradient-to-r from-cyan-500/20 to-transparent rounded"></div>
+              </div>
+              <div className="space-y-4">
+                <div className="text-sm text-muted-foreground">ETH/USD</div>
+                <div className="text-4xl font-bold text-accent">$3,845</div>
+                <div className="text-sm text-green-400">↑ 5.1% (24h)</div>
+                <div className="h-12 bg-gradient-to-r from-magenta-500/20 to-transparent rounded"></div>
+              </div>
+              <div className="space-y-4">
+                <div className="text-sm text-muted-foreground">AI Score</div>
+                <div className="text-4xl font-bold text-purple-400">8.7/10</div>
+                <div className="text-sm text-green-400">Strong Buy Signal</div>
+                <div className="h-12 bg-gradient-to-r from-purple-500/20 to-transparent rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 px-4 border-t border-border">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 neon-glow">What Traders Say</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Join thousands of successful traders using Quantum Kienzy</p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Alex Chen",
+                role: "Crypto Trader",
+                text: "Quantum Kienzy's AI predictions helped me increase my ROI by 45% in just 3 months. The real-time analytics are game-changing.",
+                roi: "+45%"
+              },
+              {
+                name: "Sarah Williams",
+                role: "Portfolio Manager",
+                text: "The Web3 integration is seamless. I can manage multiple wallets and execute trades across different chains effortlessly.",
+                roi: "+62%"
+              },
+              {
+                name: "Marcus Johnson",
+                role: "Day Trader",
+                text: "The AI signals are incredibly accurate. I've been using it for 6 months and haven't looked back. Best investment ever.",
+                roi: "+78%"
+              }
+            ].map((testimonial, idx) => (
+              <Card key={idx} className="bg-card border-border hover:border-primary transition-all duration-300 p-6">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground mb-6">"{testimonial.text}"</p>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-bold">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-green-400">{testimonial.roi}</p>
+                    <p className="text-xs text-muted-foreground">ROI</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 px-4 border-t border-border bg-card/30">
+        <div className="container">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 neon-glow">Simple Pricing</h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">Choose the plan that fits your trading style</p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Starter",
+                price: "$29",
+                period: "/month",
+                description: "Perfect for beginners",
+                features: ["Real-time price data", "Basic AI signals", "5 watchlists", "Email support"],
+                cta: "Get Started",
+                highlight: false
+              },
+              {
+                name: "Pro",
+                price: "$99",
+                period: "/month",
+                description: "For serious traders",
+                features: ["Advanced AI predictions", "Unlimited watchlists", "Portfolio tracking", "Priority support", "API access"],
+                cta: "Start Free Trial",
+                highlight: true
+              },
+              {
+                name: "Enterprise",
+                price: "Custom",
+                period: "",
+                description: "For institutions",
+                features: ["Custom integrations", "Dedicated account manager", "Advanced analytics", "White-label options", "24/7 support"],
+                cta: "Contact Sales",
+                highlight: false
+              }
+            ].map((plan, idx) => (
+              <Card
+                key={idx}
+                className={`border transition-all duration-300 ${
+                  plan.highlight
+                    ? "border-primary bg-gradient-to-br from-cyan-500/10 to-magenta-500/10 scale-105"
+                    : "border-border hover:border-primary"
+                }`}
+              >
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                  <p className="text-muted-foreground mb-6">{plan.description}</p>
+                  <div className="mb-6">
+                    <span className="text-5xl font-bold text-primary">{plan.price}</span>
+                    <span className="text-muted-foreground">{plan.period}</span>
+                  </div>
+                  <Button
+                    className={`w-full mb-8 ${
+                      plan.highlight
+                        ? "bg-primary text-background hover:bg-cyan-500"
+                        : "border-primary text-primary hover:bg-primary/10"
+                    }`}
+                    variant={plan.highlight ? "default" : "outline"}
+                  >
+                    {plan.cta}
+                  </Button>
+                  <div className="space-y-4">
+                    {plan.features.map((feature, i) => (
+                      <div key={i} className="flex gap-3 items-center">
+                        <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                        <span className="text-sm">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
