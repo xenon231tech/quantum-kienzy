@@ -1,0 +1,22 @@
+# Quantum Kienzy Code Owners
+# This file defines who is responsible for different parts of the codebase
+
+# All files
+* @xenon231tech
+
+# Frontend
+/client/ @xenon231tech
+/client/src/ @xenon231tech
+/client/src/pages/ @xenon231tech
+/client/src/components/ @xenon231tech
+/client/src/hooks/ @xenon231tech
+
+# Configuration
+/.github/ @xenon231tech
+/package.json @xenon231tech
+/tsconfig.json @xenon231tech
+/vite.config.ts @xenon231tech
+
+# Documentation
+/README.md @xenon231tech
+/LICENSE @xenon231tech

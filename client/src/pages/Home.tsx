@@ -30,9 +30,11 @@ export default function Home() {
             <a href="#about" className="hover:text-primary transition-colors">About</a>
             <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
           </div>
-          <Button className="bg-primary text-background hover:bg-cyan-500">
-            Launch App
-          </Button>
+          <a href="/dashboard">
+            <Button className="bg-primary text-background hover:bg-cyan-500">
+              Launch App
+            </Button>
+          </a>
         </div>
       </nav>
 
@@ -65,12 +67,16 @@ export default function Home() {
               Quantum Kienzy combines cutting-edge cryptocurrency technology with artificial intelligence to revolutionize digital finance and automation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Button size="lg" className="bg-primary text-background hover:bg-cyan-500 text-lg">
-                Get Started <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                Learn More
-              </Button>
+              <a href="/dashboard">
+                <Button size="lg" className="bg-primary text-background hover:bg-cyan-500 text-lg">
+                  Get Started <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </a>
+              <a href="/roadmap">
+                <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
+                  Learn More
+                </Button>
+              </a>
             </div>
           </div>
         </div>
